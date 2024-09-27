@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="layout/base::layout(~{::body})">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShopper </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+</head>
+
+<body>
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5" ng-controller="checkout-ctrl">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Billing Address</h4>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Full name</label>
+                            <input class="form-control" ng-model="order.account.fullname" type="text" placeholder="">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            <input class="form-control" ng-model="order.account.email" type="text" placeholder="">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" ng-model="order.phoneNumber" type="tel" placeholder="+123 456 789">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Address Line 1</label>
+                            <input class="form-control" ng-model="order.address.addressLine"  type="text" placeholder="123 Street">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label >Country</label>
+                            <select id="country" class="custom-select" >
+                                <option value="">Select a country</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" ng-model="order.address.city" type="text" placeholder="New York">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Province</label>
+                            <input class="form-control" ng-model="order.address.province" type="text" placeholder="State">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" ng-model="order.address.postalCode" type="text" placeholder="123">
+                        </div>
+
+                    </div>
+
+                </div>
+<!--                <div class="collapse mb-4" id="shipping-address">-->
+<!--                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>First Name</label>-->
+<!--                            <input class="form-control" type="text" placeholder="John">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>Last Name</label>-->
+<!--                            <input class="form-control" type="text" placeholder="Doe">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>E-mail</label>-->
+<!--                            <input class="form-control" type="text" placeholder="example@email.com">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>Mobile No</label>-->
+<!--                            <input class="form-control" type="text" placeholder="+123 456 789">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>Address Line 1</label>-->
+<!--                            <input class="form-control" type="text" placeholder="123 Street">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>Address Line 2</label>-->
+<!--                            <input class="form-control" type="text" placeholder="123 Street">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>Country</label>-->
+<!--                            <select class="custom-select">-->
+<!--                                <option selected>United States</option>-->
+<!--                                <option>Afghanistan</option>-->
+<!--                                <option>Albania</option>-->
+<!--                                <option>Algeria</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>City</label>-->
+<!--                            <input class="form-control" type="text" placeholder="New York">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>State</label>-->
+<!--                            <input class="form-control" type="text" placeholder="New York">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6 form-group">-->
+<!--                            <label>ZIP Code</label>-->
+<!--                            <input class="form-control" type="text" placeholder="123">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
+                        <span class="ml-auto text-right">${{order.totalPrice + 10 | number : 2}}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Products</h5>
+                        <div class="d-flex justify-content-between" >
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="">Product</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="p in order.ordersDetails" style="max-height: 100px">
+                                        <td class="" style="text-overflow: ellipsis;">{{p.product.name}}</td>
+                                        <td class="text-center align-middle">{{p.quantity}}</td>
+                                        <td class="text-center align-middle">{{p.product.price * p.quantity | number : 2}}</td>
+                                    </tr>
+                            </table>
+
+                        </div>
+
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group" th:each="payment : ${paymentmethods}">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" name="payment" th:attr="id=${payment.toString()}, value=${payment.name()}, ng-model=@{order.paymentmethod}" >
+                                <label class="custom-control-label" th:attr="for=${payment.toString()}" th:utext="${payment.name()}"></label>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" ng-click="order.purchase()">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+</body>
+
+</html>

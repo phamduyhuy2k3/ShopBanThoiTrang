@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <th:block th:each="br,iterStart : ${session.breadcrumb}">
+            <a class="stext-109 cl8 hov-cl1 trans-04" th:if="${iterStart.index != iterStart.size - 1}"  th:href="@{${br.getUrl()}}"   >
+                [[${br.getTitle()}]] <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+            <span class="stext-109 cl4" th:if="${iterStart.index == iterStart.size - 1}" >[[${br.getTitle()}]]</span>
+
+        </th:block>
+    </div>
+</div>
+</body>
+</html>

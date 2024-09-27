@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>Admin page</title>
+
+    <!-- Simple bar CSS -->
+    <link rel="stylesheet" href="/adminResource/css/simplebar.css">
+    <!-- Fonts CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Icons CSS -->
+    <link rel="stylesheet" href="/adminResource/css/feather.css">
+    <link rel="stylesheet" href="/adminResource/css/select2.css">
+    <link rel="stylesheet" href="/adminResource/css/dropzone.css">
+    <link href="/adminResource/css/uppy.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/adminResource/css/jquery.steps.css">
+    <link rel="stylesheet" href="/adminResource/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/adminResource/css/quill.snow.css">
+    <!-- Date Range Picker CSS -->
+    <link rel="stylesheet" href="/adminResource/css/daterangepicker.css">
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/adminResource/css/app-light.css" id="lightTheme">
+    <link rel="stylesheet" href="/adminResource/css/app-dark.css" id="darkTheme" disabled>
+
+  </head>
+  <body class="vertical  light  " ng-app="app" ng-controller="mainCtrl">
+    <div class="wrapper">
+      <ng-include src="'/adminResource/Navbar.html'"></ng-include>
+      <ng-include src="'/adminResource/Sidebar.html'"></ng-include>
+      <ng-view></ng-view>
+        <ng-include src="'/adminResource/StaticModal.html'"></ng-include>
+    </div> <!-- .wrapper -->
+
+    <script src="/adminResource/js/jquery.min.js"></script>
+    <script src="/js/angular-1.8.2/angular.min.js"></script>
+    <script src="/js/angular-1.8.2/angular-route.min.js"></script>
+    <script src="/adminResource/js/angular/AdminApp.js"></script>
+    <script src="/adminResource/js/angular/Product.js"></script>
+  </body>
+</html>

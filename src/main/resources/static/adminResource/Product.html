@@ -1,0 +1,247 @@
+<main role="main" class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <h2 class="mb-2 page-title">Data table</h2>
+                <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible
+                    tool, built upon the foundations of progressive enhancement, that adds all of these advanced
+                    features to any HTML table. </p>
+                <div class="row my-4">
+                    <div class="col-md-12">
+                        <div class="card shadow tab-content">
+                            <div class="card-header">
+                                Table
+                            </div>
+                            <div id="productTable" class="card-body">
+                                <div class="toolbar">
+                                    <form class="form">
+                                        <div class="form-row">
+                                            <div class="form-group col-auto mr-auto">
+<!--                                                <label class="my-1 mr-2 sr-only"-->
+
+                                            </div>
+                                            <div class="form-group col-auto">
+                                                <label for="search" class="sr-only">Search</label>
+                                                <input type="text" ng-model="searchProduct" class="form-control" id="search1" value=""
+                                                       placeholder="Search">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="col ml-auto">
+                                        <div class="dropdown float-right">
+                                            <button class="btn btn-primary float-right ml-3" type="button"
+                                                    data-toggle="modal" data-target="#productForm" ng-click="reset()">
+                                                Add more +
+                                            </button>
+                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="actionMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"> Action
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="actionMenuButton">
+                                                <a class="dropdown-item" href="#">Export</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- table -->
+                                <table class="table table-borderless table-hover">
+                                    <thead>
+                                    <tr>
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="all2">
+                                                <label class="custom-control-label" for="all2"></label>
+                                            </div>
+                                        </td>
+                                        <th>ID</th>
+                                        <th class="w-25">Name</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Available</th>
+                                        <th>Create Date</th>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in pager.items | filter : searchProduct">
+                                        <td>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="{{'item'+item.id}}">
+                                                <label class="custom-control-label" for="{{'item'+item.id}}"></label>
+                                            </div>
+                                        </td>
+                                        <td><p class="mb-0 text-muted"><strong>{{item.id}}</strong></p></td>
+                                        <td class="w-25">
+                                            <p class="mb-0 text-muted"><strong>{{item.name}}</strong></p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 text-muted">{{item.price}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 text-muted">{{item.stock}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 text-muted">{{item.available}}</p>
+                                        </td>
+                                        <td>
+                                            <p class="mb-0 text-muted">{{item.createdDate}}</p>
+                                        </td>
+                                        <td class="text-muted">{{item.category.name}}</td>
+                                        <td>
+                                            <button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="text-muted sr-only">Action</span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#productForm"
+                                                   ng-click="edit(item)">Edit</a>
+                                                <a class="dropdown-item" href="" ng-click="delete(item)">Remove</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Table Paging" class="mb-0 text-muted">
+                                    <ul class="pagination justify-content-center mb-0">
+                                        <li class="page-item"><a class="page-link" ng-click="pager.prev()">Previous</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">{{pager.page }}</a></li>
+                                        <li class="page-item"><a class="page-link" ng-click="pager.next()">Next</a></li>
+                                    </ul>
+                                    <button class="btn btn-primary" ng-click="pager.page =pageCurrent -1">Go to page</button>
+                                    <label ng-init="pageCurrent=pager.page +1" >Total pages: {{pager.count}}</label>
+                                    <div>
+                                        <input type="number" ng-model="pageCurrent" min="1" max="{{pager.count}}"  >
+
+
+                                    </div>
+
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- simple table -->
+            </div> <!-- end section -->
+        </div> <!-- .col-12 -->
+    </div>
+
+    <div  class="modal fade" id="productForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog " style="max-width: 95%" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" >&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body " style="height: 530px; overflow-y: scroll">
+                    <div class="mx-auto w-50" >
+                        <div class="form-group">
+                            <label for="productId" class="col-form-label">Id</label>
+                            <div class="">
+                                <input type="number" ng-model="form.id" class="form-control" id="productId"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productName" class="col-form-label">Name</label>
+                            <div class="">
+                                <input type="text" ng-model="form.name" class="form-control" id="productName"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice" class=" col-form-label">Price</label>
+                            <div class="">
+                                <input class="form-control" ng-model="form.price" id="productPrice" type="number" step="any"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="discount" class=" col-form-label">Discount</label>
+                            <div class="">
+                                <input class="form-control" ng-model="form.disCount" id="discount" type="number"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="stock" class=" col-form-label">Stock</label>
+                            <div class="">
+                                <input class="form-control" ng-model="form.stock" id="stock" type="number"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock" class=" col-form-label">Available</label>
+                            <div class="">
+                                <input class=" col-form-label" ng-model="form.available" id="available"
+                                       type="checkbox">
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="stock" class=" col-form-label">Created Date</label>
+                            <div class="">
+                                <input class="form-control" ng-model="form.createdDate" id="createDate" type="date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="col-form-label">Category</label>
+                            <div class="">
+                                <select ng-model="form.category.id" id="category" class="form-control ">
+                                    <option ng-repeat="c in categories" ng-value="c.id">{{c.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Image cover</label>
+                            <div class="">
+                                <div id="drag-drop-area1"></div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="col-form-label">List Image</label>
+                            <div class="">
+                                <div id="drag-drop-area2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="update()" ng-if="action==false">Save changes</button>
+                    <button type="button" class="btn btn-primary" ng-click="create()" ng-if="action==true">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/adminResource/js/popper.min.js"></script>
+    <script src="/adminResource/js/moment.min.js"></script>
+    <script src="/adminResource/js/bootstrap.min.js"></script>
+    <script src="/adminResource/js/simplebar.min.js"></script>
+    <script src='/adminResource/js/daterangepicker.js'></script>
+    <script src='/adminResource/js/jquery.stickOnScroll.js'></script>
+    <script src="/adminResource/js/tinycolor-min.js"></script>
+    <script src="/adminResource/js/config.js"></script>
+    <script src='/adminResource/js/dataTables.bootstrap4.min.js'></script>
+    <script src='/adminResource/js/uppy.min.js'></script>
+    <script src="/adminResource/js/apps.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'UA-56159088-1');
+    </script>
+</main> <!-- main -->
+

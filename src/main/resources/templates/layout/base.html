@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="layout(content)">
+<head >
+    <meta charset="UTF-8">
+    <title>KARMA</title>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" >
+
+    <!-- Libraries Stylesheet -->
+    <link rel="stylesheet" th:href="@{/lib/owlcarousel/assets/owl.carousel.min.css}" >
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" >
+    <th:block th:if="${disableHeader == true}">
+        <link rel="stylesheet" th:href="@{/fonts/material-icon/css/material-design-iconic-font.min.css}">
+        <link rel="stylesheet" th:href="@{/css/login.css}">
+    </th:block>
+
+
+</head>
+<body class="animsition " style="overflow-x: hidden" ng-app="userApp" ng-controller="cart-ctrl">
+<div class="">
+    <th:block th:replace="~{/layout/Navbar}"></th:block>
+    <th:block th:if="${disableHeader == false || disableHeader == null }" >
+        <th:block th:replace="~{/layout/Header}"></th:block>
+    </th:block>
+</div>
+
+<th:block th:replace="${content}" >
+
+</th:block>
+<th:block th:replace="~{/layout/Footer}">
+</th:block>
+<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<script th:src="@{/js/angular-1.8.2/angular.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script th:src="@{/js/angularAppUser.js}"></script>
+<script th:src="@{/js/service.js}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/lib/easing/easing.min.js}"></script>
+<script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
+
+<!-- Contact Javascr@ipt File -->
+<script th:src="@{/mail/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{/mail/contact.js}"></script>
+<!-- Template Javascript -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

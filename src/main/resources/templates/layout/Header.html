@@ -1,0 +1,17 @@
+<div class="container-fluid bg-secondary mb-5" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3" th:utext="${title}"></h1>
+        <div class="d-inline-flex" >
+            <th:block th:each="b,iter : ${session.breadcrumb}">
+                <th:block th:if="${iter.index != iter.size - 1 }">
+                    <span class="m-0"><a th:href="${b.url}" th:utext="${b.title}"></a></span>
+                    <span class="m-0 px-2">-</span>
+                </th:block>
+                <th:block th:if="${iter.index == iter.size - 1 }">
+                    <span class="m-0" th:utext="${b.title}"></span>
+                </th:block>
+            </th:block>
+
+        </div>
+    </div>
+</div>
